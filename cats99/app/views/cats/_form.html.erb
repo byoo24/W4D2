@@ -1,0 +1,47 @@
+
+<% action = cat.persisted? ? cat_url(cat) : cats_url %>
+<% button_text = cat.persisted? ? "Edit Cat" : "Submit" %>
+
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<form action="<%= action %>" method="POST">
+    <% if cat.persisted? %>
+        <input type="hidden" name="_method" value="PATCH">
+    <% end %>
+
+
+    <label for="cat_name"> NAME </label>
+    <input type="text"
+            value="<%= cat.name %>"
+            id="cat_name"
+            name="cat[name]">
+
+    <label for="cat_color"> COLOR </label>
+    <select id= "cat_color" 
+            name="cat[color]">
+                <option value="red" <%= cat.color == 'red' ? 'selected' : '' %> > red </option>
+                <option value="orange" <%= cat.color == 'orange' ? 'selected' : '' %> > orange </option>
+                <option value="yellow" <%= cat.color == 'yellow' ? 'selected' : '' %> > yellow </option>
+                <option value="green" <%= cat.color == 'green' ? 'selected' : '' %> >  green</option>
+                <option value="blue"  <%= cat.color == 'blue' ? 'selected' : '' %> > blue</option>
+                <option value="indigo" <%= cat.color == 'indigo' ? 'selected' : '' %> > indigo</option>
+                <option value="violet" <%= cat.color == 'violet' ? 'selected' : '' %> > violet</option>
+    </select>
+
+    <label for="cat_male_sex"> MALE </label>
+    <input type="radio" id="cat_male_sex" name="cat[sex]" value="M" > 
+
+     <label for="cat_female_sex">FEMALE</label>
+    <input type="radio" id="cat_female_sex" name="cat[sex]" value="F" checked> 
+ 
+    <label for="cat_description"> DESCRIPTION </label>
+    <input type="text"
+            value="<%= cat.description%>"
+            id="cat_descripion"
+            name="cat[description]">
+            
+    <input type="submit" value="<%= button_text %>">
+
+</form>
